@@ -25,7 +25,7 @@ Elements(:,5) = eps;
 % [q1, qm1, qs1, div_q1]  = q_calc_funcTest(Nodes(:,2:3), Data_LS);
 % [q2, qm2, qs2, div_q2]  = q_calc_func(Nodes(:,2:3), Data_LS);
 % [q3, qm3, qs3, div_q3]  = q_calc_funcPolynom(Nodes(:,2:3), Data_LS);
-[q4, qm4, qs4, div_q4]    = q_calc_funcPolynom3(vert);
+[q4, qm4, qs4, div_q4]    = q_calc_func(vert);
 
 stiff                = zeros(2*length(vert),2*length(vert));
 stiffinteg           = zeros(2*length(vert),2*length(vert));

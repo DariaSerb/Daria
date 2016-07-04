@@ -1,0 +1,100 @@
+function [q, qm, qsm, div_q] = q_calc_funcPolynom3(X)
+% compute polinome 3th order
+[N,M] = size(X);
+% M = 2
+q     = zeros(N,1);
+% two components of q - function
+qm     = zeros(N,2);
+qsx    = zeros(N,1);
+qsy    = zeros(N,1);
+qsm    = zeros(N,2*M);
+div_q  = zeros(N,1);
+r      = zeros(N,1);
+coeff  = zeros(1,3);
+Data_LS(1) = 0;
+Data_LS(2) = 0;
+Data_LS(3) = 40;
+
+ for n = 1:N
+  r(n)  = sqrt((X(n,1) - Data_LS(1)).^2 + (X(n,2) - Data_LS(2)).^2);   
+
+  [q(n), qsx(n), qsy(n), coeff(1,:)] = q_calcPolynom3(X(n,:), r(n), Data_LS);
+      
+  qm(n, 1)  = q(n) * (X(n,1) - Data_LS(1))/r(n);
+  qm(n, 2)  = q(n) * (X(n,2) - Data_LS(2))/r(n);
+  
+  var = (coeff(:,2) + 2 * coeff(:,3) * r(n));
+  
+  qsm(n, 1) = var*(X(n,1) - Data_LS(1))^2/r(n) + (coeff(:,1) + coeff(:,2)*r(n) + coeff(:,3)*r(n)^2) * 1;
+  qsm(n, 2) = var*(X(n,1) - Data_LS(1))*(X(n,2) - Data_LS(2))/r(n);
+  qsm(n, 3) = var*(X(n,1) - Data_LS(1))*(X(n,2) - Data_LS(2))/r(n);
+  qsm(n, 4) = var*(X(n,2) - Data_LS(2))^2/r(n) + (coeff(:,1) + coeff(:,2)*r(n) + coeff(:,3)*r(n)^2) * 1;
+  
+  div_q(n,:) = qsm(n, 1) + qsm(n, 4);
+ end
+end
+
+function [q, qsx, qsy, coeff] = q_calcPolynom3(X, r, Data_LS)
+
+r0    = Data_LS(3);
+delta = 0.02;
+r1    = r0 + delta;
+
+q1 = 0.0;
+q2 = 1.0;
+
+% parameters of graphic q-function
+
+if r > r1
+    q   = q1;
+    qsx = 0; 
+    qsy = 0; 
+    coeff(1,:) = 0;
+    return;
+end
+if r <= r0
+    q   = q2;
+    qsx = 0; 
+    qsy = 0;  
+    coeff(1,:) = 0;
+    return;
+end;
+
+if (r < r1)&&(r > r0)
+    [f, fs, coeff] = funcPolynom3(r);
+    q = f;
+    qs = fs; 
+    qsx = qs * (X(:,1) - Data_LS(1))/r; 
+    qsy = qs * (X(:,2) - Data_LS(2))/r; 
+    
+    return;
+end;
+end
+
+function [y, ys, coeff] = funcPolynom3(r)
+%f_calc_PH analytical calculation f-function and derivative of f
+qq1 = 1; qq2 = 0;
+N = 3;
+coeff = solv_slaeq3(qq1, qq2, N);
+  y  = coeff(:,1)*r + coeff(:,2)*r^2 + coeff(:,3)*r^3;
+  ys = coeff(:,1) + 2*coeff(:,2)*r + 3*coeff(:,3)*r^2;
+ end
+  
+ function coeff = solv_slaeq3(qq1, qq2, N)
+%SOLV_SLAEQ 
+% the physical definition of coefficients of linear algebratic equations system 
+r0    = 0.015;
+delta = 0.02;
+r1    = r0 + delta;
+
+A = [r0, r0^2, r0^3; r1, r1^2, r1^3; 1, 2*r0, 3*r0^2];
+D = zeros(N,1);
+
+  B = [qq1; qq2; 0];
+  D = linsolve(A,B);
+  coeff = zeros(N,1);
+ for n=1:N
+   coeff(n) = D(n);
+ end
+ coeff = coeff';
+ end

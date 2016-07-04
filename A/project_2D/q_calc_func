@@ -1,0 +1,61 @@
+function [q, qm, qsm, div_q] = q_calc_func(X)
+[N,M] = size(X);
+% M = 2
+q     = zeros(N,1);
+% two components of q - function
+qm    = zeros(N,2);
+qsx   = zeros(N,1);
+qsy   = zeros(N,1);
+qsm   = zeros(N,2*M);
+div_q = zeros(N,1);
+r     = zeros(N,1);
+tol_h = 1e-4;
+Data_LS(1) = 0;
+Data_LS(2) = 0;
+Data_LS(3) = 40;
+for n = 1:N
+    r(n)  = sqrt((X(n,1) - Data_LS(1)).^2 + (X(n,2) - Data_LS(2)).^2);
+    
+    if r(n) < tol_h
+        q(n)       = 1;
+        qm(n, :)   = 0;
+        qsm(n, :)  = 0;
+        div_q(n,:) = 0;
+    else
+        
+        [q(n), qsx(n), qsy(n)] = q_calc(X(n,:), r(n), Data_LS);
+        
+        qm(n, 1)  = q(n) * (X(n,1) - Data_LS(1))/r(n);
+        qm(n, 2)  = q(n) * (X(n,2) - Data_LS(2))/r(n);
+        qsm(n, 1) = qsx(n) * (X(n,1) - Data_LS(1))/r(n) + q(n)/r(n) - qm(n, 1)*(X(n,1) - Data_LS(1))/r(n)^2;
+        qsm(n, 2) = qsy(n) * (X(n,1) - Data_LS(1))/r(n) - qm(n, 2) * (X(n,1) - Data_LS(1))/r(n)^2;
+        qsm(n, 3) = qsx(n) * (X(n,2) - Data_LS(2))/r(n) - qm(n, 1) * (X(n,2) - Data_LS(2))/r(n)^2;
+        qsm(n, 4) = qsy(n) * (X(n,2) - Data_LS(2))/r(n) + q(n)/r(n) - qm(n, 2)*(X(n,2) - Data_LS(2))/r(n)^2;
+        div_q(n,:) = qsm(n, 1) + qsm(n, 4);
+    end
+end
+end
+
+function [q, qsx, qsy] = q_calc(X, r, Data_LS)
+x_pos_center = Data_LS(1);
+y_pos_center = Data_LS(2);
+r0    = Data_LS(3);
+delta = 10;
+r1    = r0 + delta;
+
+qsr = 0;
+qsx = 0;
+qsy = 0;
+if r <= r0
+    q  = 1;
+else
+    if r >= r1
+        q  = 0;
+    else
+        q     = 0.5 * (1 + cos(pi * (r - r0)/delta));
+        qsr   = - 0.5 * (pi / delta) * sin(pi * (r - r0)/delta);
+        qsx   = qsr * (X(:,1) - x_pos_center)/r;
+        qsy   = qsr * (X(:,2) - y_pos_center)/r;
+    end
+end
+end

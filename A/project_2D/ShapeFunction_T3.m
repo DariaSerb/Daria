@@ -5,7 +5,7 @@ function [N, Ns, Nt] = ShapeFunction_T3(zgp)
 % zgp:  coordinates of Gauss points in the reference element
 % Output:
 % N, Ns, Nt: matrices storing the values of the shape functions on the Gauss points
-% of the reference element. Each row concerns to a Gauss point
+% of the reference element. 
 
 s = zgp(:,1); 
 t = zgp(:,2); 

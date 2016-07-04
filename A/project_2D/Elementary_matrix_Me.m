@@ -31,12 +31,6 @@ nen       = length(xe);
  for in=1:nedof
    Metest_T3_lump(in,in)=sum(Metest_T3(in,:));
  end
-%  Metest_T3_lump(1,1) = Metest_T3(1,1)+Metest_T3(1,2)+Metest_T3(1,3)+Metest_T3(1,4)+Metest_T3(1,5)+Metest_T3(1,6);
-%  Metest_T3_lump(2,2) = Metest_T3(2,1)+Metest_T3(2,2)+Metest_T3(2,3)+Metest_T3(2,4)+Metest_T3(2,5)+Metest_T3(2,6);
-%  Metest_T3_lump(3,3) = Metest_T3(3,1)+Metest_T3(3,2)+Metest_T3(3,3)+Metest_T3(3,4)+Metest_T3(3,5)+Metest_T3(3,6);
-%  Metest_T3_lump(4,4) = Metest_T3(4,1)+Metest_T3(4,2)+Metest_T3(4,3)+Metest_T3(4,4)+Metest_T3(4,5)+Metest_T3(4,6);
-%  Metest_T3_lump(5,5) = Metest_T3(5,1)+Metest_T3(5,2)+Metest_T3(5,3)+Metest_T3(5,4)+Metest_T3(5,5)+Metest_T3(5,6);
-%  Metest_T3_lump(6,6) = Metest_T3(6,1)+Metest_T3(6,2)+Metest_T3(6,3)+Metest_T3(6,4)+Metest_T3(6,5)+Metest_T3(6,6);
 end
 
 

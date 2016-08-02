@@ -8,13 +8,13 @@ function  Ketest_T3 = Elementary_matrix_Ke(Xe, N, Ns, Nt, E, nedof, ngaus, wgp, 
 % nu, e, alpha: material property
 
 Ketest_T3 = zeros(nedof); 
-B         = zeros(3, nedof); 
+B         = zeros(3,nedof); 
 xe        = Xe(:,2);
 nen       = length(xe); 
 
  for ig = 1:ngaus
     % plane stress (alpha = 0) plane strain (alpha = 1)
-    C = [1-alpha*nu, nu, 0; nu, 1 - alpha*nu, 0; 0, 0, (1 - nu - alpha*nu)/2];
+    C = [1 - alpha * nu, nu, 0; nu, 1 - alpha * nu, 0; 0, 0, (1 - nu - alpha * nu)/2];
     C = C * E/(1 - nu - alpha * nu)/(1 + nu);
    
     N_ig    = N(ig,:);
@@ -33,10 +33,7 @@ nen       = length(xe);
     B(2,2:2:end) = ny;
     B(3,1:2:end) = ny;
     B(3,2:2:end) = nx;
-    Ketest_T3    = Ketest_T3 + e * B' * C * B * dvolu; 
+    Ketest_T3    = Ketest_T3 + e * B' * C * B * abs(dvolu); 
+%   Ketest_T3    = Ketest_T3 + e * B' * C * B * dvolu; 
  end
 end
-
-
-
-

@@ -23,15 +23,13 @@ nen       = length(xe);
     J     = det(Jacob); 
     dvolu = wgp(ig) * J; 
     
-    N_T_ig    = [reshape([1;0]*N_ig,1,nedof); reshape([0;1]*N_ig,1,nedof)];
-    Metest_T3 = Metest_T3 + e * N_T_ig' * rho * N_T_ig * dvolu; 
+    N_T_ig    = [reshape([1;0] * N_ig,1,nedof); reshape([0;1] * N_ig,1,nedof)];
+    Metest_T3 = Metest_T3 + e * N_T_ig' * rho * N_T_ig * abs(dvolu); 
+%   Metest_T3 = Metest_T3 + e * N_T_ig' * rho * N_T_ig * dvolu; 
  end
 
- Metest_T3_lump = zeros(nedof);
+   Metest_T3_lump = zeros(nedof);
  for in=1:nedof
    Metest_T3_lump(in,in)=sum(Metest_T3(in,:));
  end
 end
-
-
-

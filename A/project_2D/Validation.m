@@ -7,7 +7,7 @@ classdef Validation
     
     methods (Static)
       function out = ValidMethod()
-        if (P.radiusout < P.lx)&&(P.radiusout < P.ly)   
+        if (P.radiusout < 0.5*P.lx)&&(P.radiusout < 0.5*P.ly)   
         out = true;
         else
         out = false;    

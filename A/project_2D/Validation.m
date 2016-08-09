@@ -5,11 +5,13 @@ classdef Validation
       P = Initialize_Parameters_2D();
     end
     
-    methods 
-      function ValidMethod(obj,arg1)
-       obj = pi*obj.R1^2;    
-    
+    methods (Static)
+      function out = ValidMethod()
+        if (P.radiusout < P.lx)&&(P.radiusout < P.ly)   
+        out = true;
+        else
+        out = false;    
+        end
       end
     end
 end
-

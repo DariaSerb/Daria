@@ -32,15 +32,20 @@ function P = Initialize_Parameters_2D()
     % domain min(x) max(x) min(y) max(y) 
     a = 0.3;
     b = 0.2;
-    P.domain = [-a, a, -b, b];
+    domain = [-a, a, -b, b];
     else
     a = 0.4;
     b = 0.2;
-    P.domain = [ 0, a,  0, b];    
+    domain = [ 0, a,  0, b];    
     end
-     
+    lx = domain(2) - domain(1);
+    ly = domain(4) - domain(3);
+    
+    P.domain = domain;
+    P.lx     = lx;
+    P.ly     = ly;
+    
     tolerance = 1e-7;
-    P.tolerance       = tolerance;
-    P.Data_LS         = [pos_x_center pos_y_center radius tolerance];
+    P.tolerance = tolerance;
+    P.Data_LS   = [pos_x_center pos_y_center radius tolerance];
 end
-

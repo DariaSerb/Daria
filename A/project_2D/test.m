@@ -13,3 +13,6 @@ P                = Initialize_Parameters_2D();
 ReferenceElement = SetReferenceElement();
 
 out = Validation(P);
+if out == 0
+break
+end

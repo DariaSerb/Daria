@@ -13,18 +13,12 @@ function P = Initialize_Parameters_2D()
     P.ModeEst = 3;
         
     % Basic characteristics of the LS-function
-    pos_x_center  = 0.00;
-    pos_y_center  = 0.00;
-    radius        = 0.04;
-    delta         = 0.08;
-    radiusout     = radius + delta;
-    
-    P.pos_x_center  = pos_x_center;
-    P.pos_y_center  = pos_y_center;
-    P.radius        = radius;
-    P.delta         = delta;
-    P.radiusout     = radiusout;
-    
+    P.pos_x_center  = 0.00;
+    P.pos_y_center  = 0.00;
+    P.radius        = 0.04;
+    P.delta         = 0.08;
+    P.radiusout     = P.radius + P.delta;
+           
     % the identification of plate's sizes
     flag = 0;
     
@@ -32,20 +26,15 @@ function P = Initialize_Parameters_2D()
     % domain min(x) max(x) min(y) max(y) 
     a = 0.3;
     b = 0.2;
-    domain = [-a, a, -b, b];
+    P.domain = [-a, a, -b, b];
     else
     a = 0.4;
     b = 0.2;
-    domain = [ 0, a,  0, b];    
+    P.domain = [ 0, a,  0, b];    
     end
-    lx = domain(2) - domain(1);
-    ly = domain(4) - domain(3);
-    
-    P.domain = domain;
-    P.lx     = lx;
-    P.ly     = ly;
-    
-    tolerance = 1e-7;
-    P.tolerance = tolerance;
-    P.Data_LS   = [pos_x_center pos_y_center radius tolerance];
-end
+    P.lx = P.domain(2) - P.domain(1);
+    P.ly = P.domain(4) - P.domain(3);
+           
+    P.tolerance = 1e-7;
+    P.Data_LS   = [P.pos_x_center P.pos_y_center P.radius P.tolerance];
+ end

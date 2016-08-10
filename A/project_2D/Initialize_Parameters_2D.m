@@ -20,10 +20,10 @@ function P = Initialize_Parameters_2D()
     P.radiusout     = P.radius + P.delta;
            
     % the identification of plate's sizes
-    flag = 0;
+    flag = 1;
     
     if flag == 0
-    % domain min(x) max(x) min(y) max(y) 
+    % domain [min(x) max(x) min(y) max(y)]
     a = 0.3;
     b = 0.2;
     P.domain = [-a, a, -b, b];

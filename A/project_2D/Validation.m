@@ -5,6 +5,6 @@ function out = Validation(P)
   disp('correct input data');
   else
   out = false;
-  disp('incorrect input data'); 
+  disp('incorrect input data: to change the size of mesh or delta'); 
   end
 end

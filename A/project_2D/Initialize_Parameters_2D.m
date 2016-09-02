@@ -10,26 +10,43 @@ function P = Initialize_Parameters_2D()
     % Number of frequencies and modes of interest
     P.ModeCnt = 20;
     % Number of estimated frequencies and modes
-    P.ModeEst = 3;
-        
-    % Basic characteristics of the LS-function
-    P.pos_x_center  = 0.00;
-    P.pos_y_center  = 0.00;
+    P.ModeEst = 5;
+    
+    % dr is a scalar parameter which allows to follow the evolution of the structure     
+    P.dr   = [0.000; 0.001; 0.005; 0.006; 0.007; 0.010; 0.015; 0.030; 0.040; 0.060];
+    
+    % dTau is a scalar parameter which allows to follow the evolution of the structure     
+    P.dTau = [0.000; 0.001; 0.005; 0.006; 0.007; 0.010; 0.015; 0.030; 0.040; 0.060];
+    
+    % Basic characteristics of the LS-function and hole
+    
     P.radius        = 0.04;
     P.delta         = 0.08;
     P.radiusout     = P.radius + P.delta;
-           
-    % the identification of plate's sizes
-    flag = 1;
+    
+    % the identification of plate's sizes and position of the hole
+    flag = 2;
     
     if flag == 0
+    P.pos_x_center  = 0.00;
+    P.pos_y_center  = 0.00;    
     % domain [min(x) max(x) min(y) max(y)]
     a = 0.3;
     b = 0.2;
     P.domain = [-a, a, -b, b];
-    else
+    end
+    if flag == 1
+    P.pos_x_center  = 0.20;
+    P.pos_y_center  = 0.10;       
     a = 0.4;
     b = 0.2;
+    P.domain = [ 0, a,  0, b];   
+    end
+    if flag == 2
+    P.pos_x_center  = 0.30;
+    P.pos_y_center  = 0.20;       
+    a = 0.6;
+    b = 0.4;
     P.domain = [ 0, a,  0, b];    
     end
     P.lx = P.domain(2) - P.domain(1);

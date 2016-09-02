@@ -7,24 +7,23 @@ clc;
 Graphic_display = 'yes';
 Name_Mat        = 'material_properties.txt';
 
-% Read the material file
-% [Properties] = ReadMaterial(Name_Mat);
-rho     = 7.8e-9;    %(t/mm3)
-e       = 1.1;       % (mm)
-E       = 210000;    % (MPa)
-nu      = 0.3;       % (-)
-alpha   = 0;         % = 0 Plane Stress = 1 Plane Strain
+% Init parameters in meters
+P = Initialize_Parameters_2D();
 
-% Number of frequencies and modes of interest
-ModeCnt = 10;
+% Read the material file
+ModeCnt = P.ModeCnt;
+ModeEst = P.ModeEst;
+domain  = P.domain;
+Data_LS = P.Data_LS; 
 Elements(:,1) = {1:length(el),1);
 Elements(:,2:4) = el;
 Elements(:,5) = eps;
 
-% comparison the q - function
-% [q1, qm1, qs1, div_q1]  = q_calc_funcTest();
-% [q3, qm3, qs3, div_q3]  = q_calc_funcPolynom3(vert);
-[q4, qm4, qs4, div_q4]    = q_calc_func(vert);
+% Validation of initial parameters
+out = Validation(P);
+if out == 0
+ return
+end
 
 stiff                = zeros(2*length(vert),2*length(vert));
 stiffinteg           = zeros(2*length(vert),2*length(vert));
@@ -32,6 +31,7 @@ stiffinteg           = zeros(2*length(vert),2*length(vert));
 mass_lump            = zeros(2*length(vert),2*length(vert));
 massinteg            = zeros(2*length(vert),2*length(vert));
 massinteg_lump       = zeros(2*length(vert),2*length(vert));
+
 %--------------------------------------------------------------------------
 % Integration weights and shape functions
 % Number of Gauss points
@@ -112,12 +112,3 @@ for in=1:size(Elements,1)
       massinteg_lump(Te_dof,Te_dof)  = massinteg_lump(Te_dof,Te_dof) + Metest_XT3_lump;
     end
 end
-
-save 'stiffmassFullMatrix.mat' stiff  mass_lump  stiffinteg  massinteg_lump;
-  
-%--------------------------------------------------------------------------
-% q-function that determines the transition between configurations
-
-figure(1)
-trimesh(el,vert(:,2),vert(:,3),q(:,2))
-title('The determination q(X)-function');

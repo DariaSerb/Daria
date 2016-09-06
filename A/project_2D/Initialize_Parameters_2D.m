@@ -1,4 +1,4 @@
-function P = Initialize_Parameters_2D()
+ffunction P = Initialize_Parameters_2D()
 % system parameters value
 
     P.rho     = 7800;      % (kg/m3)
@@ -13,16 +13,17 @@ function P = Initialize_Parameters_2D()
     P.ModeEst = 5;
     
     % dr is a scalar parameter which allows to follow the evolution of the structure     
-    P.dr   = [0.000; 0.001; 0.005; 0.006; 0.007; 0.010; 0.015; 0.030; 0.040; 0.060];
+    P.dr    = [0.000; 0.001; 0.005; 0.006; 0.007; 0.010; 0.015; 0.030; 0.040; 0.060];
     
     % dTau is a scalar parameter which allows to follow the evolution of the structure     
-    P.dTau = [0.000; 0.001; 0.005; 0.006; 0.007; 0.010; 0.015; 0.030; 0.040; 0.060];
+    P.dTau  = [0.000; 0.001; 0.005; 0.006; 0.007; 0.010; 0.015; 0.030; 0.040; 0.060];
+    P.N_tau = length(P.dTau);
     
     % Basic characteristics of the LS-function and hole
     
-    P.radius        = 0.04;
-    P.delta         = 0.08;
-    P.radiusout     = P.radius + P.delta;
+    P.r0        = 0.04;
+    P.delta     = 0.08;
+    P.radiusout = P.r0 + P.delta;
     
     % the identification of plate's sizes and position of the hole
     flag = 2;
@@ -53,5 +54,5 @@ function P = Initialize_Parameters_2D()
     P.ly = P.domain(4) - P.domain(3);
            
     P.tolerance = 1e-7;
-    P.Data_LS   = [P.pos_x_center P.pos_y_center P.radius P.tolerance];
+    P.Data_LS   = [P.pos_x_center P.pos_y_center P.r0 P.tolerance];
  end

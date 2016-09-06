@@ -1,8 +1,5 @@
 function [Nodes] = ComputeLS(Nodes,Type_LS,Data_LS,Graphic_display)
 
-% LS = InitializeLS(Nodes,Elements,Type_LS,Data_LS)
-% Nodal values of the level set function
-
 if strcmp(Type_LS, 'Circle')
     
     x_pos_center = Data_LS(1);

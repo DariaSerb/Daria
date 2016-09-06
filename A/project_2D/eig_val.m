@@ -1,8 +1,5 @@
 function [freq_sorted,Vanal,muianal] = eig_val(Nodes,Elements)
 
-% Calculation of eigenvalue problem in 2D using XFEM for plate with hole /modelling hole by LS/
-% r0 is initial radius of hole
-
 P                = Initialize_Parameters_2D();
 ReferenceElement = SetReferenceElement();
 

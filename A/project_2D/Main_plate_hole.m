@@ -5,8 +5,14 @@ clc;
 % Begin Timer
 tic
 
+N = 321; W = 0.6; H = 0.4;
+filename = create_name_mesh(N,W,H);
+
+s = strcat(filename,'.msh');
+
 Graphic_display  = 'yes';
-Name_GMSH        = '2Dmesh_0_6_0_4_N__321.msh';
+Name_GMSH        = 'C:\Users\Dasha\Documents\MATLAB\myTest_2D\new\meshes_XFEM\filename.msh';
+% Name_GMSH        = 'C:\Users\Dasha\Documents\MATLAB\myTest_2D\new\meshes_XFEM\2Dmesh_0_6_0_4_N__321.msh';
 Type_LS          = 'Circle';
 
 % Init parameters in meters

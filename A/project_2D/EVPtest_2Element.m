@@ -149,18 +149,18 @@ utemp  = u(:,1);
 utempx = utemp(1:2:end);
 utempy = utemp(2:2:end);
 
-% coef = zeros(length(Nodes),2);
-% for in=1:length(Nodes)
-%    coef(in,1) = Nodes(in,2); 
-%    coef(in,2) = (ly/lx) * Nodes(in,2); 
-%    NodesNew(in,2) = Nodes(in,2) + coef(in,1) * utempx(in,1);
-%    NodesNew(in,3) = Nodes(in,3) + coef(in,2) * utempy(in,1);
-% end
+ coef = zeros(length(Nodes),2);
+ for in=1:length(Nodes)
+    coef(in,1) = Nodes(in,2); 
+    coef(in,2) = (ly/lx) * Nodes(in,2); 
+    NodesNew(in,2) = Nodes(in,2) + coef(in,1) * utempx(in,1);
+    NodesNew(in,3) = Nodes(in,3) + coef(in,2) * utempy(in,1);
+ end
 
-coef = scalefactor(utempx,utempy);
+% coef = scalefactor(utempx,utempy);
 
-NodesNew(:,2) = Nodes(:,2) + coef(1) * utempx(:,1);
-NodesNew(:,3) = Nodes(:,3) + coef(2) * utempy(:,1);
+% NodesNew(:,2) = Nodes(:,2) + coef(1) * utempx(:,1);
+% NodesNew(:,3) = Nodes(:,3) + coef(2) * utempy(:,1);
 
 figure;
     hold on;

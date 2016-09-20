@@ -2,13 +2,13 @@ clear all;
 close all;
 clc;
 
-% 20/09/2016    
+% 19/09/2016    
 % Begin Timer
 tic
 
 % Read coordinates (in m) of Nodes end Elements 
 Graphic_display  = 'yes';
-Name_INP         = 'plate_400_200.inp';
+Name_INP         = 'C:\Users\Dasha\Documents\MATLAB\myTest_2D\Job_abaqus\plate_400_200.inp';
 
 % Nodes    = [1, 0.0, 0.0; 2, 0.400, 0.0; 3, 0.4, 0.2; 4, 0.0, 0.2];
 % Elements = [1, 1, 2, 4; 2, 2, 3, 4];
@@ -130,11 +130,11 @@ lambda_sorted  = lambda_sorted(1:length(D));
 mui  = diag(V' * mass * V);
 
 eigvec_FEM = V';
-% MaxMode = zeros(size(eigvec_FEM,1),1);  
-%   for nn = 1:size(eigvec_FEM,1)
-%    MaxMode(nn)  = max(eigvec_FEM(:,nn));
-%    eigvec_FEM_norm(:,nn) = eigvec_FEM(:,nn)/MaxMode(nn);
-%   end
+MaxMode = zeros(size(eigvec_FEM,1),1);  
+  for nn = 1:size(eigvec_FEM,1)
+   MaxMode(nn)  = max(eigvec_FEM(:,nn));
+   eigvec_FEM(:,nn) = eigvec_FEM(:,nn)/MaxMode(nn);
+  end
 
 % Restoring full matrix of degrees of freedom  
 u               = zeros(2*length(Nodes),size(V,1));  
@@ -149,7 +149,7 @@ utemp  = u(:,1);
 utempx = utemp(1:2:end);
 utempy = utemp(2:2:end);
 
- coef = zeros(length(Nodes),2);
+coef = zeros(length(Nodes),2);
  for in=1:length(Nodes)
     coef(in,1) = Nodes(in,2); 
     coef(in,2) = (ly/lx) * Nodes(in,2); 

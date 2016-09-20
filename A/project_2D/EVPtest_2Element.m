@@ -2,13 +2,13 @@ clear all;
 close all;
 clc;
 
-% 19/09/2016    
+% 20/09/2016    
 % Begin Timer
 tic
 
 % Read coordinates (in m) of Nodes end Elements 
 Graphic_display  = 'yes';
-Name_INP         = 'C:\Users\Dasha\Documents\MATLAB\myTest_2D\Job_abaqus\plate_400_200.inp';
+Name_INP         = 'plate_400_200.inp';
 
 % Nodes    = [1, 0.0, 0.0; 2, 0.400, 0.0; 3, 0.4, 0.2; 4, 0.0, 0.2];
 % Elements = [1, 1, 2, 4; 2, 2, 3, 4];

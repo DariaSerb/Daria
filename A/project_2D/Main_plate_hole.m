@@ -33,11 +33,12 @@ end
 % Read of GMSH information
 [Nodes,Elements]  = ReadGMSH(Name_GMSH,Graphic_display);
 
-[freqNum, uNum] = EigenSolutionNum_XFEM(Nodes,Elements,0.07);
+[freqNum, uNum] = EigenSolutionNum(Nodes,Elements,0.07);
 
 for n = 1:N_dr
    radius(n) = r0 + dr(n);   
    [freqNum, uNum] = EigenSolutionNum_XFEM(Nodes,Elements,Type_LS,radius(n));
+   freqEst         = EigenSolutionEst(Nodes,Elements,Type_LS,radius(n));
    freqNum(n,:) = freqNum;
 end
 

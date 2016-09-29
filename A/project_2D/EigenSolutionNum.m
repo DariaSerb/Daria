@@ -1,4 +1,4 @@
-function [freqNum,eigvec_XFEM] = EigenSolutionNum_XFEM(Nodes,Elements,radius)
+function [freqNum,eigvec_XFEM] = EigenSolutionNum(Nodes,Elements,radius)
 
 % Init parameters in meters
 P = Initialize_Parameters_2D();

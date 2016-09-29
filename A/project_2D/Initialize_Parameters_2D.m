@@ -12,11 +12,14 @@ ffunction P = Initialize_Parameters_2D()
     % Number of estimated frequencies and modes
     P.ModeEst = 5;
     
-    % dr is a scalar parameter which allows to follow the evolution of the structure     
-    P.dr    = [0.000; 0.001; 0.005; 0.006; 0.007; 0.010; 0.015; 0.030; 0.040; 0.060];
+    % dr is a scalar parameter which allows to follow the evolution of the structure   
+    % P.dr  = [0.000; 0.001; 0.005; 0.006; 0.007; 0.010; 0.015; 0.030; 0.040; 0.060];
+    P.dr    = linspace(0,0.06,100);
+    P.N_dr = length(P.dr);
     
     % dTau is a scalar parameter which allows to follow the evolution of the structure     
-    P.dTau  = [0.000; 0.001; 0.005; 0.006; 0.007; 0.010; 0.015; 0.030; 0.040; 0.060];
+    % P.dTau = [0.000; 0.001; 0.005; 0.006; 0.007; 0.010; 0.015; 0.030; 0.040; 0.060];
+    P.dTau  = linspace(0,0.06,100);
     P.N_tau = length(P.dTau);
     
     % Basic characteristics of the LS-function and hole

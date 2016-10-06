@@ -5,7 +5,6 @@ for in=1:size(Elements,1)
  if Elements(in,5) == 1
     Te     = Elements(in,2:4);
     Xe     = Nodes(Te,2:3);
-    Xetest = NodesNew(Te,2:3);
     LSe    = Nodes(Te,4); 
     [p1 p2] = FindPointLS0test(Xe,LSe);
     plot(p1(1),p1(2),'m.',p2(1),p2(2),'m.','LineWidth',8)

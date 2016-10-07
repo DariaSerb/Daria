@@ -6,7 +6,7 @@ clc;
 tic
 
 Graphic_display  = 'yes';
-Name_GMSH     = '2Dmesh_0_6_0_4_N__321.msh';
+Name_GMSH     = '2Dmesh_N_321_W_0.6_H_0.4.msh';
 % Name_GMSH   = '2Dmesh_N_1211_W_0.6_H_0.4.msh'; 	
 
 Type_LS          = 'Circle';

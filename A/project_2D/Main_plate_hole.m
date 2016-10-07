@@ -42,12 +42,3 @@ for n = 1:N_dr
    freqNum(n,:) = freqNum;
 end
 
-for n = 1:ModeEst
-   figure(n + 1);
-   plot(radius, freqNum(:,n), radius, freqEst(:,n), 'LineWidth', 3);
-   legend('freqNum','freqEst',3)
-   grid on;
-   title(strcat('Natural frequency # ', num2str(n), ' for the position of the initial radius', ' r_0 = ',  num2str(r0), ' [m]'),'FontSize', 12);
-   xlabel('r_0 [m]','FontSize', 12);
-   ylabel('Natural frequency, f [Hz]','FontSize', 12);
-end

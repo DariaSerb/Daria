@@ -1,14 +1,12 @@
 function [Nodes] = ComputeLS(Nodes,Type_LS,Data_LS,Graphic_display)
 
-% LS = InitializeLS(Nodes,Elements,Type_LS,Data_LS)
-% Nodal values of the level set function
-
+P = Initialize_Parameters_2D();
 if strcmp(Type_LS, 'Circle')
     
-    x_pos_center = Data_LS(1);
-    y_pos_center = Data_LS(2);
-    Radius       = Data_LS(3);
-    tolerance    = Data_LS(4);
+    x_pos_center = P.Data_LS(1);
+    y_pos_center = P.Data_LS(2);
+    Radius       = P.Data_LS(3);
+    tolerance    = P.Data_LS(4);
     
     r = sqrt((Nodes(:,2) - x_pos_center).^2 + (Nodes(:,3) - y_pos_center).^2);
     LS = r - Radius;

@@ -1,6 +1,4 @@
 function error_indicator(Nodes,Elements,Type_LS)
-%This function is to plot the Modal Assurance Criterion (MAC) matrix between identified mode shapes
-
 P = Initialize_Parameters_2D();
 
 % the calculation of Mnorm for each time step

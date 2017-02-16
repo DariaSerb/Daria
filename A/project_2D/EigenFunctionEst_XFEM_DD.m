@@ -28,8 +28,6 @@ end
 
 % u = InitialApproximation;
 [lambda,u,DerivLambda,DerivShapes,dof_out_BC_hole,C] = DirectDeriv(Nodes,Elements);
-% load('DirectDeriv.mat','DirectDeriv') 
-
 
 lambda = lambda';
 LambdaEst = zeros(1,ModeEst);
@@ -62,12 +60,6 @@ if flag == 1
     for j = 1:size(Elements,1)
         % Plot the FEM elements
         if Elements(j,5) == 0
-        % plot of the initial configuration
-%         tab(1,1:2) = [Nodes(Elements(j,2),2) Nodes(Elements(j,2),3)];
-%         tab(2,1:2) = [Nodes(Elements(j,3),2) Nodes(Elements(j,3),3)];
-%         tab(3,1:2) = [Nodes(Elements(j,4),2) Nodes(Elements(j,4),3)];
-%         tab(4,1:2) = [Nodes(Elements(j,2),2) Nodes(Elements(j,2),3)];
-%         plot(tab(:,1),tab(:,2),'k.--') 
         % plot of the current configuration    
         tab(1,1:2) = [NodesCurrent(Elements(j,2),2) NodesCurrent(Elements(j,2),3)];
         tab(2,1:2) = [NodesCurrent(Elements(j,3),2) NodesCurrent(Elements(j,3),3)];
@@ -77,12 +69,6 @@ if flag == 1
         end
         % Plot the XFEM elements
         if Elements(j,5) == 1
-        % plot of the initial configuration (cut element)
-%         tab(1,1:2) = [Nodes(Elements(j,2),2) Nodes(Elements(j,2),3)];
-%         tab(2,1:2) = [Nodes(Elements(j,3),2) Nodes(Elements(j,3),3)];
-%         tab(3,1:2) = [Nodes(Elements(j,4),2) Nodes(Elements(j,4),3)];
-%         tab(4,1:2) = [Nodes(Elements(j,2),2) Nodes(Elements(j,2),3)];
-%         plot(tab(:,1),tab(:,2),'r.--')    
        % plot of the current configuration
         tab(1,1:2) = [NodesCurrent(Elements(j,2),2) NodesCurrent(Elements(j,2),3)];
         tab(2,1:2) = [NodesCurrent(Elements(j,3),2) NodesCurrent(Elements(j,3),3)];
@@ -91,12 +77,6 @@ if flag == 1
         plot(tab(:,1),tab(:,2),'m.-') 
         end
         if Elements(j,5) == -1
-        % plot of the initial configuration (inside element)
-%         tab(1,1:2) = [Nodes(Elements(j,2),2) Nodes(Elements(j,2),3)];
-%         tab(2,1:2) = [Nodes(Elements(j,3),2) Nodes(Elements(j,3),3)];
-%         tab(3,1:2) = [Nodes(Elements(j,4),2) Nodes(Elements(j,4),3)];
-%         tab(4,1:2) = [Nodes(Elements(j,2),2) Nodes(Elements(j,2),3)];
-%         plot(tab(:,1),tab(:,2),'g.--')    
        % plot of the current configuration
         tab(1,1:2) = [NodesCurrent(Elements(j,2),2) NodesCurrent(Elements(j,2),3)];
         tab(2,1:2) = [NodesCurrent(Elements(j,3),2) NodesCurrent(Elements(j,3),3)];
@@ -131,42 +111,7 @@ if flag == 1
 end 
 % Separation the elements in three sets
 NodesCurrent(:,4) = NodesTemp(:,4);
-
-% to comment
-% if strcmp(Type_LS, 'Circle')
-%     [Elements] = SeparateElements(Elements(:,1:4),NodesCurrent,'YES');
-%     % Separation the elements inside the void
-%     ind_In  = 1;
-%     for ii = 1:size(Elements,1)
-%         if Elements(ii,5) == -1;
-%             Elems_In(ind_In) = ii;
-%             ind_In = ind_In + 1;
-%         end
-%     end
-% else
-%     Elements(:,5) = zeros(size(Elements,1),1);
-% end  
-
-% load('SeparateElements.mat','Elems_In','Elems_Out','Elems_Cut');
-% for i=1:size(Elements,1)
-%     if Elements(i,5) == 1;
-%         Epsilon_matter = AreaRatio(Elements,Elems_Cut(i),NodesCurrent,NodesCurrent(:,4));
-%         Elements(Elems_Cut(i),6) = Epsilon_matter;
-%     end
-% end
-
-% save('NodesCurrent.mat','NodesCurrent');
-% save('ElementsCurrent.mat','Elements');
-% 
-% 
-% [freq,eigvec,mui] = eig_val(NodesCurrent,Elements);
-% freqNum = freq(1:P.ModeEst);
-% uNum    = eigvec(:,1:P.ModeEst);
-% save('freqNumCurrent.mat','freqNum') 
-% 
-% mac  = MAC(uNum', uest');  
-
-    
+   
 % the definition of the first five estimated modes
 if flag == 1 
   for in = 1:ModeEst;
@@ -174,49 +119,4 @@ if flag == 1
   end
 end
 
-
-% for in = 1:ModeEst
-% utempx = uest(1:2:end,in);
-% utempy = uest(2:2:end,in);
-% 
-% coef(1) = 0.15 * P.lx;
-% coef(2) = 0.15 * P.ly;
-% 
-% NodesNew(:,2) = NodesCurrent(:,2) + coef(1) * utempx(:);
-% NodesNew(:,3) = NodesCurrent(:,3) + coef(2) * utempy(:);
-% 
-% xmin = min(NodesNew(:,2));
-% xmax = max(NodesNew(:,2));
-% ymin = min(NodesNew(:,3));
-% ymax = max(NodesNew(:,3));
-% 
-% if flag == 1
-% % plot of the first mode
-%     figure(in+2);
-%     hold on;
-%     for j = 1:size(Elements,1)
-%         % Plot the FEM elements
-%         if Elements(j,5) == 0
-%         tab(1,1:2) = [NodesNew(Elements(j,2),2) NodesNew(Elements(j,2),3)];
-%         tab(2,1:2) = [NodesNew(Elements(j,3),2) NodesNew(Elements(j,3),3)];
-%         tab(3,1:2) = [NodesNew(Elements(j,4),2) NodesNew(Elements(j,4),3)];
-%         tab(4,1:2) = [NodesNew(Elements(j,2),2) NodesNew(Elements(j,2),3)];
-%         plot(tab(:,1),tab(:,2),'b.-') 
-%         end
-%         % Plot the XFEM elements
-%         if Elements(j,5) == 1
-%         tab(1,1:2) = [NodesNew(Elements(j,2),2) NodesNew(Elements(j,2),3)];
-%         tab(2,1:2) = [NodesNew(Elements(j,3),2) NodesNew(Elements(j,3),3)];
-%         tab(3,1:2) = [NodesNew(Elements(j,4),2) NodesNew(Elements(j,4),3)];
-%         tab(4,1:2) = [NodesNew(Elements(j,2),2) NodesNew(Elements(j,2),3)];
-%         plot(tab(:,1),tab(:,2),'w.-') 
-%         end
-%               
-%         axis([xmin xmax ymin ymax]) 
-% %       title(['The plot of the estimated displacement field of the plate r_0 = ', num2str(P.r0),' [m]']);
-%         title(strcat('The estimated mode # ', num2str(in), ' for dTau = ',  num2str(dTau)),'FontSize', 12);
-% 
-%     end
-%  end
-% end
 end

@@ -23,8 +23,7 @@ tic
 filename = create_name_mesh(N,W,H);
 
 Graphic_display  = 'YES';
-  Name_GMSH  = strcat('C:\Users\Dasha\Documents\MATLAB\myTest_2D\new\meshes_XFEM\',filename,'.msh');
-% Name_GMSH  = strcat('D:\PhD_thesis\MATLAB\myTest_2D\new\meshes_XFEM\',filename,'.msh');
+Name_GMSH  = strcat('C:\Users\Dasha\Documents\MATLAB\myTest_2D\new\meshes_XFEM\',filename,'.msh');
 Type_LS      = 'Circle';
 
 % Init parameters in meters

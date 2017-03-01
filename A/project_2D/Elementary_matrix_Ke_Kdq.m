@@ -34,8 +34,7 @@ div_q        = zeros(ngaus, 1);
     Xst(1,:) = Xe(1,:) + (Xe(2,:) - Xe(1,:)) * N_ig(:,2) + (Xe(3,:) - Xe(1,:)) * N_ig(:,3);
    
     % q - function selection    
-    [q(ig,:), qm(ig,:), qs(ig,:), div_q(ig,:)] = q_calc_funcMain(Xst);   
-%   [qm(ig,:), qs(ig,:), div_q(ig,:)]          = q_calc_funcPolynom4(Xst);   
+    [qm(ig,:), qs(ig,:), div_q(ig,:)] = q_calc_funcPolynom4(Xst);   
     
     Jacob = [Ns_ig(1:nen); Nt_ig(1:nen)] * Xe;
     J     = det(Jacob); 
@@ -61,11 +60,5 @@ div_q        = zeros(ngaus, 1);
     Ketest_T3       = Ketest_T3 + e * B' * C * B * dvolu; 
     Ketest_T3_dq    = Ketest_T3_dq + e * B' * C * Bnew * dvolu; 
     Ketest_T3_divq  = Ketest_T3_divq + e * B' * C * B * dvolu * div_q(ig,:); 
-    
-%   Ketest_T3_dq    = Ketest_T3_dq + 0.5*(e * Bnew' * C * Bnew * dvolu + (e * Bnew' * C * Bnew * dvolu)');     
-%   Ketest_T3_divq  = Ketest_T3_divq + 0.5*(e * Bnew' * C * Bnew * dvolu * div_q(ig,:) + (e * Bnew' * C * Bnew * dvolu * div_q(ig,:))'); 
- end
+  end
 end
-
-
-

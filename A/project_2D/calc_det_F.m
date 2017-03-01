@@ -41,8 +41,7 @@ valid = zeros(length(ngaus));
    Xst(1,:) = Xe(1,:) + (Xe(2,:) - Xe(1,:)) * N_ig(:,2) + (Xe(3,:) - Xe(1,:)) * N_ig(:,3);
 
    % q - function selection 
-   [q(ig,:), qm(ig,:), qs(ig,:), div_q(ig,:)] = q_calc_funcMain(Xst);
-%  [qm(ig,:), qs(ig,:), div_q(ig,:)]          = q_calc_funcPolynom4(Xst);   
+   [qm(ig,:), qs(ig,:), div_q(ig,:)] = q_calc_funcPolynom4(Xst);   
    
    qsm = (reshape(qs(ig,:),2,2))'; 
    det_q = det(qsm);
@@ -97,7 +96,3 @@ valid = zeros(length(ngaus));
       Metest_T3_det_F_lump(in,in) = sum(Metest_T3_det_F(in,:));
     end
 end
-
-
-
- 

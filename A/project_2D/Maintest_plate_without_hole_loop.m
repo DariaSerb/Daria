@@ -1,8 +1,6 @@
 function Maintest_plate_without_hole_loop()
     % 27/02/2017    
-    % Begin Timer
-    tic
-    
+        
 % Read coordinates (in m) of Nodes end Elements 
  Graphic_display  = 'yes';
  Name_GMSH         = 'C:\Users\Dasha\Documents\MATLAB\myTest_2D\new\meshes_others\2Dmesh_0_4_0_2_N_258.msh';

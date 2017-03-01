@@ -15,10 +15,8 @@ M       = 2;
 q       = zeros(ngaus, 1);
 qm      = zeros(ngaus, M);
 qs      = zeros(ngaus, 2 * M);
-%qsm    = zeros(M, M);
 div_q   = zeros(ngaus, 1);
 
-% Nm = zeros(3, nedof); 
 xe        = Xe(:,2);
 nen       = length(xe); 
 
@@ -31,12 +29,10 @@ nen       = length(xe);
     Xst(1,:) = Xe(1,:) + (Xe(2,:) - Xe(1,:)) * N_ig(:,2) + (Xe(3,:) - Xe(1,:)) * N_ig(:,3);
 
    % q - function selection 
-   [q(ig,:), qm(ig,:), qs(ig,:), div_q(ig,:)] = q_calc_funcMain(Xst);  
-%  [qm(ig,:), qs(ig,:), div_q(ig,:)]          = q_calc_funcPolynom4(Xst);   
+    [qm(ig,:), qs(ig,:), div_q(ig,:)]          = q_calc_funcPolynom4(Xst);   
 
     qsm = (reshape(qs(ig,:),2, 2))'; 
     
-
     Jacob = [Ns_ig(1:nen); Nt_ig(1:nen)] * Xe;
     J     = det(Jacob); 
     dvolu = wgp(ig) * abs(J); 
@@ -53,6 +49,3 @@ nen       = length(xe);
       Metest_T3_lump(in,in)=sum(Metest_T3(in,:));
     end
 end
-
-
-

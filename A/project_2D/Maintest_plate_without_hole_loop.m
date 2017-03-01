@@ -1,21 +1,10 @@
 function Maintest_plate_without_hole_loop()
-
-    disp('**********************************************************************************************'); 
-    disp('Calculation eigenvalue problem in 2D using FEM for plate without hole /by three choice of q(X)/') 
-    disp('in the case when the plate’s length in horizontal direction is changing')
-    disp('the main goal is to evaluate of satisfaction of eigensolution estimated on initial configuration')
-    disp('**********************************************************************************************'); 
-
-    % Calculation eigenvalue problem in 2D using FEM for plate without hole /by three choice of q(X)/
-    % in the case when the plate’s length in horizontal direction is changing
-    % to evaluate of satisfaction of eigensolution estimated on initial configuration    
     % 27/02/2017    
     % Begin Timer
     tic
     
 % Read coordinates (in m) of Nodes end Elements 
  Graphic_display  = 'yes';
-%Name_GMSH         = '2Dmesh_0_4_0_2_N_931_E_1748.msh';
  Name_GMSH         = 'C:\Users\Dasha\Documents\MATLAB\myTest_2D\new\meshes_others\2Dmesh_0_4_0_2_N_258.msh';
 
 %domain min(x) max(x) min(y) max(y) 

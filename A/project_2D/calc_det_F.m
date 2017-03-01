@@ -1,4 +1,6 @@
 function [Ketest_T3_det_F,Ketest_T3_det_F1,Metest_T3_det_F,Metest_T3_det_F_lump,valid_F_inv] = calc_det_F(Xe,N,Ns,Nt,rho,alpha,nu,E,nedof,ngaus,wgp,e,dTau)
+% 06/02/2017
+% determination of the determinant of the gradient of transformation
 
 M     = 2;
 q     = zeros(ngaus, 1);
@@ -18,6 +20,11 @@ xe    = Xe(:,2);
 nen   = length(xe); 
 valid = zeros(length(ngaus));
 
+% det_F     = 0 + 1;
+% I         = eye(2);
+% F         = 0 + I;
+% F_inverse = 0 + I;
+
   for ig = 1:ngaus
   
    det_F     = 1;
@@ -36,10 +43,11 @@ valid = zeros(length(ngaus));
 
    % q - function selection 
    [q(ig,:), qm(ig,:), qs(ig,:), div_q(ig,:)] = q_calc_funcMain(Xst);
+%  [qm(ig,:), qs(ig,:), div_q(ig,:)]          = q_calc_funcPolynom4(Xst);   
    
    qsm = (reshape(qs(ig,:),2,2))'; 
-   det_q = qs(ig,1) * qs(ig,4) - qs(ig,3) * qs(ig,2);
-   
+   det_q = det(qsm);
+      
    % the calculation of det_F  and F^(-1) 
    det_F     = det_F + (dTau * div_q(ig,:) + dTau * dTau * det_q);  
    F         = I + dTau * qsm;

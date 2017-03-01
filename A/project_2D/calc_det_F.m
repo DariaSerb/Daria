@@ -9,7 +9,6 @@ qs    = zeros(ngaus, 2 * M);
 div_q = zeros(ngaus, 1);
 
 B               = zeros(3, nedof); 
-Bnew            = zeros(3, nedof); 
 Ketest_T3_det_F = zeros(nedof);
 Metest_T3_det_F = zeros(nedof);
 
